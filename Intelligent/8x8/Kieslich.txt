@@ -1,0 +1,83 @@
+A contribution to the knight's challenge
+http://www.fsdev.net/gf/project/knightstour
+
+This is a version written in D2, it's aimed to be fast. It started out
+as a version inspired by Chris R. Millers submission who used D. I'm in
+the process of learning D so I decided to use my own little algorithm
+and put it to code. The main approach is similar as it uses Warnsdorff's
+rule to determine the next step. I also use Chris' nice vectors matrix
+to determine legal steps. This is where the similarities end (I think).
+
+And here are the differences:
+- use the access matrix as a starting point and alter the values as I
+  go, that means the warnsdorffs values get updated due to the current
+  state of the tour
+- use a matrix that determines distance from board centre
+  (Armin Roths idea)
+  http://www.mpimf-heidelberg.mpg.de/~roth/Mma/Knight_1_0_0.html
+- create lookup tables before we run, so we don't need to calculate
+  legal positions for every move
+- eventually backtracking to positions of ambiguos values. It's my
+  theory anyway, that the points in the tour where we just choose from
+  two or more equally suited candidates is where we run into trouble
+  later. This is why backtracking to those should help to complete the
+  tour. (not yet implemented)
+- use flat arrays instead of 2D matrixes
+
+State of the code:
+It is non recursive and it would not detect a failure except that it
+probably would throw some sort of "Out of bound" array if it couldn't
+finish. At this point, it calculates tours starting from any field and
+finishes it in 64 steps. That means the heuristics work flawlessly. I
+wanna try the code on bigger boards until it fails (Roths suggest at
+about 2000x2000 it should run into blind alleys too.). THIS CODE CAN NOT
+AND PROBABLY NEVER WILL CALCULATE CLOSED TOURS, the approach seems not
+suitable.
+
+LookUp Tables:
+Mainly we get speed out of those, which is nice but not overly
+important. The second nice thing is that it is easier to walk back in
+history once we hit a blind alley.
+Speed will be achieved by storing most data into lookup tables, so that
+moves have to be calculated for a board size only once. Then, for every
+new starting position there are only lookups which moves can be taken.
+The knights rules give us a maximum of eight possible moves, that makes
+8 lookup tables.
+
+Preparation: 
+The whole logic is based on arrays that are static. This is done by choice
+and is a design decision. Every arrays length is known beforehand(static),
+as it is determined by the dimension (width*height) of the board. This
+allows us to fill the array by index instead of concatenation and by doing
+this it saves some sorting loops.
+
+Improve heuristics: Waldorff's Rule is heuristic aka "no promis it will
+succeed". So improving heuristic makes it less likely we run into blind
+alleys.  To improve the heuristics we use a table that holds the euclid
+distance from the boards centre, makes a total of 9 lookup tables. The
+format is meant to be simple, we use integers only:
+
+	2  3  4  5  5  4  3  2
+	3  6  7  8  8  7  6  3
+	4  7  9 10 10  9  7  4
+	5  8 10 11 11 10  8  5
+	5  8 10 11 11 10  8  5
+	4  7  9 10 10  9  7  4
+	3  6  7  8  8  7  6  3
+	2  3  4  5  5  4  3  2
+
+Still Warnsdorff's rule has precedence but whenever it gives an abiguous
+result we can use this table for better results.
+
+Run:
+For every run the maintable, which holds, Warnsdorff's rule gets copied and
+altered as we go. That means with every step we take, we adjust the
+actually available candidates in that table and void the fields that
+were already visited.
+
+NOTE FROM CHRIS:
+
+I have been unable to find the time to build and run this version myself, so
+I cannot include any pre-run results, nor can I provide any comparison to
+existing solutions.  I've read the code, and it shouldn't mess with your
+your computer, so don't be afraid to download D2 and give it a try.
