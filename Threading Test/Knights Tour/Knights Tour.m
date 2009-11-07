@@ -49,23 +49,24 @@ int main (int argc, const char * argv[]) {
 		[turk replaceOccurrencesOfString:@"g" withString:@"7 " options:NSCaseInsensitiveSearch range:NSMakeRange(0, [turk length])];
 		[turk replaceOccurrencesOfString:@"h" withString:@"8 " options:NSCaseInsensitiveSearch range:NSMakeRange(0, [turk length])];
 		
-		NSScanner * scanner = [[NSScanner alloc] initWithString:turk];
-//		NSCharacterSet * comma = [[NSCharacterSet characterSetWithCharactersInString:@" "] retain];
+		NSScanner * scanner = [[NSScanner alloc] initWithString:[turk autorelease]];
 		FSPoint * p; NSInteger xx, yy; NSInteger cursor=0;
 		
 		NSString * tmp;
 		
 		while([scanner isAtEnd]==NO) {
 			[scanner scanInteger:&xx];
-			//[scanner setScanLocation:[scanner scanLocation]+1];
 			[scanner scanInteger:&yy];
 			p = [[FSPoint alloc] initWithX:yy-1
 										 y:xx-1];
 			[ex setTileAt:p
 				  toValue:cursor++];
+			[p release];
 		}
 		
-		FSLog2(FSLogLevelInfo, [ex generateSvg:[args boolForKey:@"a"]]);
+		[scanner release];
+		
+		FSLog2(FSLogLevelInfo, @"\n%@",[[ex autorelease] generateSvg:[args boolForKey:@"a"]]);
 		
 		return 0;
 	}
@@ -86,6 +87,8 @@ int main (int argc, const char * argv[]) {
 	
 	if(dim.x < 5 || dim.y < 5) {
 		FSLog2(FSLogLevelError, @"Given board %@ is too small, try something a bit bigger.",dim);
+		[startingLocation release];
+		[dimensions release];
 		return -1;
 	}
 	
@@ -116,6 +119,8 @@ int main (int argc, const char * argv[]) {
 	
 	if(problemFlag==YES){
 		FSLog2(FSLogLevelError, @"Encountered problems, now terminating.");
+		[startingLocation release];
+		[dimensions release];
 		return -1;
 	}
 	
@@ -124,6 +129,8 @@ int main (int argc, const char * argv[]) {
 			   @"Given starting location %@ is not on the given board %@.",
 			   startingLocation,
 			   dimensions.dimensions);
+		[startingLocation release];
+		[dimensions release];
 		return -1;
 	}
 	
@@ -134,6 +141,9 @@ int main (int argc, const char * argv[]) {
 	
 	//! TODO: solve stuff
 
+	[startingLocation release];
+	[dimensions release];
+	
     [pool drain];
     return 0;
 }

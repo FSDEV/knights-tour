@@ -10,24 +10,24 @@
 		8DD76F9A0486AA7600D96B5E /* Knights Tour.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* Knights Tour.m */; settings = {ATTRIBUTES = (); }; };
 		8DD76F9C0486AA7600D96B5E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FB779EFE84155DC02AAC07 /* Foundation.framework */; };
 		8DD76F9F0486AA7600D96B5E /* Knights Tour.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859EA3029092ED04C91782 /* Knights Tour.1 */; };
-		DA296A5810A1257300AE9B3C /* FSLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA296A5510A1253700AE9B3C /* FSLibrary.framework */; };
 		DA433EDF109780C40011CA77 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA433EDE109780C40011CA77 /* Cocoa.framework */; };
 		DA433EE8109784A80011CA77 /* KTBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = DA433EE7109784A70011CA77 /* KTBoard.m */; };
+		DAA25D3310A50A0500573D1A /* FSLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA29693410A1227D00AE9B3C /* FSLibrary.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		DA296A5410A1253700AE9B3C /* PBXContainerItemProxy */ = {
+		DAA25DEB10A50B5F00573D1A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DA296A4E10A1253700AE9B3C /* Library.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = DA296832109F86F400AE9B3C;
+			remoteGlobalIDString = DA296832109F86F400AE9B3C /* FSLibrary.framework */;
 			remoteInfo = FSLibrary;
 		};
-		DA296A5610A1253700AE9B3C /* PBXContainerItemProxy */ = {
+		DAA25DED10A50B5F00573D1A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DA296A4E10A1253700AE9B3C /* Library.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = DA296845109F879A00AE9B3C;
+			remoteGlobalIDString = DA296845109F879A00AE9B3C /* FSLibrary-Incubator.framework */;
 			remoteInfo = "FSLibrary-Incubator";
 		};
 /* End PBXContainerItemProxy section */
@@ -52,7 +52,7 @@
 		8DD76FA10486AA7600D96B5E /* Knights Tour */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Knights Tour"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6859EA3029092ED04C91782 /* Knights Tour.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = "Knights Tour.1"; sourceTree = "<group>"; };
 		DA29693410A1227D00AE9B3C /* FSLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FSLibrary.framework; path = /Library/Frameworks/FSLibrary.framework; sourceTree = "<absolute>"; };
-		DA296A4E10A1253700AE9B3C /* Library.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Library.xcodeproj; path = ../Library/Library.xcodeproj; sourceTree = SOURCE_ROOT; };
+		DA296A4E10A1253700AE9B3C /* Library.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Library.xcodeproj; path = /Users/cmiller/Code/Library/Library.xcodeproj; sourceTree = "<absolute>"; };
 		DA433EDE109780C40011CA77 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		DA433EE6109784A70011CA77 /* KTBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTBoard.h; sourceTree = "<group>"; };
 		DA433EE7109784A70011CA77 /* KTBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTBoard.m; sourceTree = "<group>"; };
@@ -63,9 +63,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA296A5810A1257300AE9B3C /* FSLibrary.framework in Frameworks */,
 				8DD76F9C0486AA7600D96B5E /* Foundation.framework in Frameworks */,
 				DA433EDF109780C40011CA77 /* Cocoa.framework in Frameworks */,
+				DAA25D3310A50A0500573D1A /* FSLibrary.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,7 +80,6 @@
 				C6859EA2029092E104C91782 /* Documentation */,
 				08FB779DFE84155DC02AAC07 /* External Frameworks and Libraries */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
-				DA29693410A1227D00AE9B3C /* FSLibrary.framework */,
 			);
 			name = "Knights Tour";
 			sourceTree = "<group>";
@@ -101,6 +100,7 @@
 			children = (
 				08FB779EFE84155DC02AAC07 /* Foundation.framework */,
 				DA433EDE109780C40011CA77 /* Cocoa.framework */,
+				DA29693410A1227D00AE9B3C /* FSLibrary.framework */,
 			);
 			name = "External Frameworks and Libraries";
 			sourceTree = "<group>";
@@ -121,11 +121,11 @@
 			name = Documentation;
 			sourceTree = "<group>";
 		};
-		DA296A4F10A1253700AE9B3C /* Products */ = {
+		DAA25DE610A50B5F00573D1A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DA296A5510A1253700AE9B3C /* FSLibrary.framework */,
-				DA296A5710A1253700AE9B3C /* FSLibrary-Incubator.framework */,
+				DAA25DEC10A50B5F00573D1A /* FSLibrary.framework */,
+				DAA25DEE10A50B5F00573D1A /* FSLibrary-Incubator.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -166,7 +166,7 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = DA296A4F10A1253700AE9B3C /* Products */;
+					ProductGroup = DAA25DE610A50B5F00573D1A /* Products */;
 					ProjectRef = DA296A4E10A1253700AE9B3C /* Library.xcodeproj */;
 				},
 			);
@@ -178,18 +178,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		DA296A5510A1253700AE9B3C /* FSLibrary.framework */ = {
+		DAA25DEC10A50B5F00573D1A /* FSLibrary.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = FSLibrary.framework;
-			remoteRef = DA296A5410A1253700AE9B3C /* PBXContainerItemProxy */;
+			remoteRef = DAA25DEB10A50B5F00573D1A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		DA296A5710A1253700AE9B3C /* FSLibrary-Incubator.framework */ = {
+		DAA25DEE10A50B5F00573D1A /* FSLibrary-Incubator.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = "FSLibrary-Incubator.framework";
-			remoteRef = DA296A5610A1253700AE9B3C /* PBXContainerItemProxy */;
+			remoteRef = DAA25DED10A50B5F00573D1A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -239,7 +239,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_OBJC_GC = required;
+				GCC_ENABLE_OBJC_GC = supported;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -255,7 +255,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_OBJC_GC = required;
+				GCC_ENABLE_OBJC_GC = supported;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;

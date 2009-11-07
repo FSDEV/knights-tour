@@ -76,6 +76,7 @@ static NSInteger KTBoardScale   = 40;
 										   y:yy];
 	if(![self.size hasFSPoint:p]) {
 		FSLog2(FSLogLevelError, @"Request to set tile for %@ on board of size %@ failed!", p, _size.dimensions);
+		[p release];
 		return;
 	}
 	[_tiles replaceObjectAtIndex:[p vectorizeWithGrid:_size.dimensions]
@@ -128,14 +129,20 @@ static NSInteger KTBoardScale   = 40;
 	 KTBoardScale
 	 ];
 	[svg appendString:@"        <g fill=\"white\" stroke=\"gray\" stroke-width=\"0.025\">\n"];
-	for(size_t x=0; x<_size.dimensions.x; ++x)
-		for(size_t y=0; y<_size.dimensions.y; ++y)
-			[svg appendFormat:@"            <rect id=\"%d_%d\" x=\"%d\" y=\"%d\" width=\"1\" height=\"1\" />\n",
-			 x,
-			 y,
-			 x,
-			 y
-			 ];
+	
+	for(size_t i=0; i<=_size.dimensions.y; ++i)
+		[svg appendFormat:@"            <line x1=\"0\" x2=\"%d\" y1=\"%d\" y2=\"%d\" />\n",
+		 _size.dimensions.x,
+		 i,
+		 i
+		 ];
+	for(size_t i=0; i<=_size.dimensions.x; ++i)
+		[svg appendFormat:@"            <line x1=\"%d\" x2=\"%d\" y1=\"0\" y2=\"%d\" />\n",
+		 i,
+		 i,
+		 _size.dimensions.y
+		 ];
+	
 	[svg appendString:@"            <g transform=\"translate(0.5,0.5)\">\n"];
 	[svg appendFormat:@"                <circle cx=\"%d\" cy=\"%d\" r=\"0.1\" stroke=\"none\" fill=\"black\" />\n",
 	 [[orderedPoints objectAtIndex:0] x],
@@ -182,10 +189,13 @@ static NSInteger KTBoardScale   = 40;
 		[svg appendString:@"                    </g>\n"];
 		[svg appendString:@"                </g>\n"];
 	}
+	[animString release];
 	[svg appendString:@"            </g>\n"];
 	[svg appendString:@"        </g>\n"];
 	[svg appendString:@"    </g>\n"];
 	[svg appendString:@"</svg>\n"];
+	
+	[orderedPoints release];
 	
 	return [NSString stringWithString:[svg autorelease]];
 }
