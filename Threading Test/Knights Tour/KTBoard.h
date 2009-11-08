@@ -11,15 +11,27 @@
 
 @interface KTBoard : NSObject {
 	NSMutableArray * _tiles;
+	NSMutableArray * _graph;
 	FSRect * _size;
 }
 
++ (NSMutableArray *)getBranchesForBoard:(KTBoard *)board
+							  lastPoint:(FSPoint *)p;
++ (NSMutableArray *)getLegalMoves;
+
 @property(readwrite, retain) NSMutableArray * tiles;
+@property(readwrite, retain) NSMutableArray * graph;
 @property(readwrite, retain) FSRect * size;
 
 - (id)init;
 - (id)initWithFSSize:(FSPoint *)size;
 - (id)initWithBoard:(KTBoard *)board;
+
+- (NSMutableArray *)getSortedBranchesForPoint:(FSPoint *)p;
+- (NSMutableArray *)getBranchesForPoint:(FSPoint *)p;
+
+- (void)showDescr;
+- (void)showDescrInternal;
 
 - (NSInteger)tileAt:(FSPoint *)p;
 - (NSInteger)tileAtX:(NSInteger)xx

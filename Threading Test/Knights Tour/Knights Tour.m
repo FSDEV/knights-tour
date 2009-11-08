@@ -10,6 +10,7 @@
 #import <FSLibrary/FSGeometry.h>
 
 #import "KTBoard.h"
+#import "KTSolver.h"
 
 int main (int argc, const char * argv[]) {
     NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
@@ -33,7 +34,11 @@ int main (int argc, const char * argv[]) {
 		return 0;
 	}
 	
-	[args setBool:YES forKey:@"e"];
+//	[args setBool:YES forKey:@"e"];
+	[args setInteger:8 forKey:@"w"];
+	[args setInteger:8 forKey:@"l"];
+	[args setInteger:0 forKey:@"sw"];
+	[args setInteger:0 forKey:@"sl"];
 	[args setBool:YES forKey:@"a"];
 	
 	if([args boolForKey:@"e"]) {
@@ -138,9 +143,30 @@ int main (int argc, const char * argv[]) {
 	FSLog2(FSLogLevelInfo, @"solving for board %@ from",dimensions);
 	FSLog2(FSLogLevelInfo, @"starting position %@",startingLocation);
 	
-	
 	//! TODO: solve stuff
-
+	
+	[NSThread setThreadPriority:0.5];
+	
+	KTBoard * b = [[KTBoard alloc] initWithFSSize:dim];
+	
+	FSLog2(FSLogLevelInfo,@"the board looks like:\n%@",b);
+	
+	// + (NSTimer *)timerWithTimeInterval:(NSTimeInterval)seconds invocation:(NSInvocation *)invocation repeats:(BOOL)repeats
+	
+//	NSTimer * displayLoop = [NSTimer scheduledTimerWithTimeInterval:1.0f
+//														 invocation:[NSInvocation invocationWithMethodSignature:[b methodSignatureForSelector:@selector(showDescr)]]
+//															repeats:YES];
+	
+	//[b performSelector:@selector(showDescr) withObject:nil afterDelay:1.0f];
+	
+	KTBoard * serialResult = [[KTSolver serialSolverForBoard:b startingPoint:startingLocation iteration:0] retain];
+	
+//	[displayLoop invalidate];
+	
+	FSLog2(FSLogLevelInfo, @"Serial result: \n%@",[serialResult generateSvg:[args boolForKey:@"a"]]);
+	
+	[serialResult release];
+	[b release];
 	[startingLocation release];
 	[dimensions release];
 	

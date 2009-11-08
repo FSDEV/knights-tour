@@ -13,6 +13,7 @@
 		DA433EDF109780C40011CA77 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA433EDE109780C40011CA77 /* Cocoa.framework */; };
 		DA433EE8109784A80011CA77 /* KTBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = DA433EE7109784A70011CA77 /* KTBoard.m */; };
 		DAA25D3310A50A0500573D1A /* FSLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA29693410A1227D00AE9B3C /* FSLibrary.framework */; };
+		DAB0A24810A511F6001B2364 /* KTSolver.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB0A24710A511F6001B2364 /* KTSolver.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -20,14 +21,14 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = DA296A4E10A1253700AE9B3C /* Library.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = DA296832109F86F400AE9B3C /* FSLibrary.framework */;
+			remoteGlobalIDString = DA296832109F86F400AE9B3C;
 			remoteInfo = FSLibrary;
 		};
 		DAA25DED10A50B5F00573D1A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DA296A4E10A1253700AE9B3C /* Library.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = DA296845109F879A00AE9B3C /* FSLibrary-Incubator.framework */;
+			remoteGlobalIDString = DA296845109F879A00AE9B3C;
 			remoteInfo = "FSLibrary-Incubator";
 		};
 /* End PBXContainerItemProxy section */
@@ -56,6 +57,8 @@
 		DA433EDE109780C40011CA77 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		DA433EE6109784A70011CA77 /* KTBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTBoard.h; sourceTree = "<group>"; };
 		DA433EE7109784A70011CA77 /* KTBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTBoard.m; sourceTree = "<group>"; };
+		DAB0A24610A511F6001B2364 /* KTSolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTSolver.h; sourceTree = "<group>"; };
+		DAB0A24710A511F6001B2364 /* KTSolver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTSolver.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +94,8 @@
 				08FB7796FE84155DC02AAC07 /* Knights Tour.m */,
 				DA433EE6109784A70011CA77 /* KTBoard.h */,
 				DA433EE7109784A70011CA77 /* KTBoard.m */,
+				DAB0A24610A511F6001B2364 /* KTSolver.h */,
+				DAB0A24710A511F6001B2364 /* KTSolver.m */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -201,6 +206,7 @@
 			files = (
 				8DD76F9A0486AA7600D96B5E /* Knights Tour.m in Sources */,
 				DA433EE8109784A80011CA77 /* KTBoard.m in Sources */,
+				DAB0A24810A511F6001B2364 /* KTSolver.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,7 +245,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_OBJC_GC = supported;
+				GCC_ENABLE_OBJC_GC = unsupported;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -255,7 +261,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_OBJC_GC = supported;
+				GCC_ENABLE_OBJC_GC = unsupported;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;

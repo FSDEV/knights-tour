@@ -7,21 +7,62 @@
 //
 
 #import <math.h>
+#import <Block.h>
 
 #import "KTBoard.h"
 
 static NSInteger KTBoardPadding = 20;
 static NSInteger KTBoardScale   = 40;
+static NSMutableArray * KTBoardLegalMoves = nil;
 
 @implementation KTBoard
 
++ (NSMutableArray *)getBranchesForBoard:(KTBoard *)board
+							  lastPoint:(FSPoint *)p {
+	NSMutableArray * branches = [[NSMutableArray alloc] initWithCapacity:7];
+	FSPoint * pm; NSAutoreleasePool * pool0 = [[NSAutoreleasePool alloc] init];
+	
+	for(FSPoint * m in [KTBoard getLegalMoves]) {
+		pm = [[FSPoint alloc] initWithX:p.x+m.x y:p.y+m.y];
+		if(![board.size hasFSPoint:pm]) {
+			[pm release];
+			continue;
+		} else if([board tileAt:pm]!=-1) {
+			[pm release];
+			continue;
+		} else {
+			[branches addObject:pm];
+			[pm release];
+		}
+	}
+	
+	[pool0 release];
+	return [branches autorelease];
+}
+
++ (NSMutableArray *)getLegalMoves {
+	if(KTBoardLegalMoves==nil) {
+		KTBoardLegalMoves = [[NSMutableArray alloc] initWithCapacity:8];
+		[KTBoardLegalMoves addObject:[[[FSPoint alloc] initWithX: 1 y: 2] autorelease]];
+		[KTBoardLegalMoves addObject:[[[FSPoint alloc] initWithX:-1 y: 2] autorelease]];
+		[KTBoardLegalMoves addObject:[[[FSPoint alloc] initWithX: 1 y:-2] autorelease]];
+		[KTBoardLegalMoves addObject:[[[FSPoint alloc] initWithX:-1 y:-2] autorelease]];
+		[KTBoardLegalMoves addObject:[[[FSPoint alloc] initWithX: 2 y: 1] autorelease]];
+		[KTBoardLegalMoves addObject:[[[FSPoint alloc] initWithX:-2 y: 1] autorelease]];
+		[KTBoardLegalMoves addObject:[[[FSPoint alloc] initWithX: 2 y:-1] autorelease]];
+		[KTBoardLegalMoves addObject:[[[FSPoint alloc] initWithX:-2 y:-1] autorelease]];
+	}
+	return KTBoardLegalMoves;
+}
+
 @synthesize tiles = _tiles;
+@synthesize graph = _graph;
 @synthesize size = _size;
 
 - (id)init {
 	// just pass through to create an 8 x 8 chessboard
 	return [self initWithFSSize:[[[FSPoint alloc] initWithX:8
-														y:8]
+														  y:8]
 							   autorelease]
 			];
 }
@@ -29,9 +70,19 @@ static NSInteger KTBoardScale   = 40;
 	if(self=[super init]) {
 		_size = [[FSRect alloc] initWithOrigin:[[[FSPoint alloc] initWithX:0 y:0] autorelease]
 									dimensions:size];
-		_tiles = [[NSMutableArray alloc] initWithCapacity:_size.dimensions.x * _size.dimensions.y];
-		for(size_t i=0; i < _size.dimensions.x * _size.dimensions.y; ++i)
+		_tiles = [[NSMutableArray alloc] initWithCapacity:(_size.dimensions.x+1) * (_size.dimensions.y+1)];
+		_graph = [[NSMutableArray alloc] initWithCapacity:(_size.dimensions.x+1) * (_size.dimensions.y+1)];
+		for(size_t i=0; i < _size.dimensions.x * _size.dimensions.y; ++i) {
 			[_tiles addObject:[NSNumber numberWithInteger:-1]];
+		}
+		FSPoint * p;
+		for(size_t x=0; x < _size.dimensions.x; ++x) {
+			for(size_t y=0; y < _size.dimensions.y; ++y) {
+				p = [[FSPoint alloc] initWithX:x y:y];
+				[_graph addObject:[NSNumber numberWithInteger:[[self getBranchesForPoint:p] count]]];
+				[p release];
+			}
+		}
 	}
 	return self;
 }
@@ -45,9 +96,43 @@ static NSInteger KTBoardScale   = 40;
 
 - (void)dealloc {
 	[_tiles release];
+	[_graph release];
 	[_size release];
 	
 	[super dealloc];
+}
+
+- (NSMutableArray *)getSortedBranchesForPoint:(FSPoint *)p {
+	NSComparator finderSort = ^(id point0, id point1) {
+		return [[_graph objectAtIndex:[point1 vectorizeWithGrid:_size.dimensions]]
+				compare:[_graph objectAtIndex:[point0 vectorizeWithGrid:_size.dimensions]]];
+	};
+	
+	// 
+	
+	return [NSMutableArray arrayWithArray:[[self getBranchesForPoint:p] sortedArrayUsingComparator:finderSort]];
+}
+
+- (NSMutableArray *)getBranchesForPoint:(FSPoint *)p {
+	NSMutableArray * branches = [[NSMutableArray alloc] initWithCapacity:7];
+	FSPoint * pm; NSAutoreleasePool * pool0 = [[NSAutoreleasePool alloc] init];
+	
+	for(FSPoint * m in [KTBoard getLegalMoves]) {
+		pm = [[FSPoint alloc] initWithX:p.x+m.x y:p.y+m.y];
+		if(![self.size hasFSPoint:pm]) {
+			[pm release];
+			continue;
+		} else if([self tileAt:pm]!=-1) {
+			[pm release];
+			continue;
+		} else {
+			[branches addObject:pm];
+			[pm release];
+		}
+	}
+	
+	[pool0 release];
+	return [branches autorelease];
 }
 
 - (NSInteger)tileAt:(FSPoint *)p {
@@ -82,6 +167,32 @@ static NSInteger KTBoardScale   = 40;
 	[_tiles replaceObjectAtIndex:[p vectorizeWithGrid:_size.dimensions]
 					  withObject:[NSNumber numberWithInteger:i]];
 	[p release];
+}
+
+- (NSString *)description {
+	NSMutableString * descr = [[NSMutableString alloc] init];
+	
+	for(size_t y=0; y<_size.dimensions.y; ++y) {
+		for(size_t x=0; x<_size.dimensions.x; ++x) {
+			[descr appendFormat:@"%2d ",[[_tiles objectAtIndex:y*_size.dimensions.y+x] integerValue]];
+		}
+		[descr appendString:@" | "];
+		for(size_t x=0; x<_size.dimensions.x; ++x) {
+			[descr appendFormat:@"%2d ",[[_graph objectAtIndex:y*_size.dimensions.y+x] integerValue]];
+		}
+		[descr appendString:@"\n"];
+	}
+	
+	return [NSString stringWithString:[descr autorelease]];
+}
+
+- (void)showDescr {
+	[self performSelectorOnMainThread:@selector(showDescrInternal) withObject:nil waitUntilDone:NO];
+	[self performSelector:@selector(showDescr) withObject:nil afterDelay:1.0f];
+}
+
+- (void)showDescrInternal {
+	FSLog2(FSLogLevelInfo,@"the board looks like:\n%@",self);
 }
 
 - (NSString *)generateSvg:(BOOL)animated {
