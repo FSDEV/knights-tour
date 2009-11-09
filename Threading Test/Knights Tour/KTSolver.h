@@ -13,7 +13,7 @@
 #import "KTBoard.h"
 
 @interface KTSolver : NSObject {
-
+	
 }
 
 + (KTBoard *)serialSolverForBoard:(KTBoard *)board

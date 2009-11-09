@@ -399,22 +399,22 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>DA3BB81210A7A43C003E94A4</string>
+										<string>DA3BB83D10A80BF8003E94A4</string>
 										<key>history</key>
 										<array>
 											<string>DA296AA710A12CC000AE9B3C</string>
-											<string>DABAA09A10A67F0E009C794F</string>
-											<string>DABAA16B10A6ACA2009C794F</string>
-											<string>DABAA16C10A6ACA2009C794F</string>
-											<string>DABAA16D10A6ACA2009C794F</string>
-											<string>DABAA17210A6ACA2009C794F</string>
 											<string>DABAA19F10A6B414009C794F</string>
 											<string>DABAA1A110A6B414009C794F</string>
-											<string>DABAA1A310A6B414009C794F</string>
-											<string>DABAA1A410A6B414009C794F</string>
-											<string>DABAA1A510A6B414009C794F</string>
-											<string>DABAA1A610A6B414009C794F</string>
-											<string>DABAA1B010A6B4F4009C794F</string>
+											<string>DA3BB82D10A80AD7003E94A4</string>
+											<string>DA3BB82E10A80AD7003E94A4</string>
+											<string>DA3BB82F10A80AD7003E94A4</string>
+											<string>DA3BB83010A80AD7003E94A4</string>
+											<string>DA3BB83110A80AD7003E94A4</string>
+											<string>DA3BB83210A80AD7003E94A4</string>
+											<string>DA3BB83310A80AD7003E94A4</string>
+											<string>DA3BB83410A80AD7003E94A4</string>
+											<string>DA3BB83510A80AD7003E94A4</string>
+											<string>DA3BB83610A80AD7003E94A4</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -595,7 +595,7 @@
 	<key>StatusbarIsVisible</key>
 	<true/>
 	<key>TimeStamp</key>
-	<real>279422012.14816701</real>
+	<real>279448568.19192201</real>
 	<key>ToolbarConfigUserDefaultsMinorVersion</key>
 	<string>2</string>
 	<key>ToolbarDisplayMode</key>
@@ -612,7 +612,7 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>DA3BB81D10A7A43C003E94A4</string>
+		<string>DA3BB83E10A80BF8003E94A4</string>
 		<string>DA3BB81E10A7A43C003E94A4</string>
 		<string>DA3BB81F10A7A43C003E94A4</string>
 		<string>/Users/cmiller/Code/knights-tour/Threading Test/Knights Tour/Knights Tour.xcodeproj</string>

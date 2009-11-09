@@ -198,8 +198,8 @@ int main (int argc, const char * argv[]) {
 												   iteration:0]
 							  retain];
 	t_end=clock();
-//	time_t diff = difftime(t_start, t_end);
-	FSLog2(FSLogLevelInfo, @"Found serial result in %d clocks",t_end-t_start);
+
+	FSLog2(FSLogLevelInfo, @"Found serial result in %d clocks",(t_end-t_start));
 	FSLog2(FSLogLevelInfo, @"Serial result: \n%@",[serialResult
 												   generateSvg:
 												   [args boolForKey:@"a"]]);
@@ -209,8 +209,15 @@ int main (int argc, const char * argv[]) {
 	
 	b = [[KTBoard alloc] initWithFSSize:dim];
 	
-	KTThreadController * t = [[KTThreadController alloc] initWithBoard:b startingLocation:startingLocation];
-	[t run];
+	KTThreadController * t = [[KTThreadController alloc] initWithBoard:b
+													  startingLocation:startingLocation];
+
+	[[[[NSThread alloc] initWithTarget:t
+							  selector:@selector(run)
+								object:nil]
+	  autorelease]
+	 start];
+	
 	while(![t finished]) {
 		[NSThread sleepForTimeInterval:1.0f];
 	}
