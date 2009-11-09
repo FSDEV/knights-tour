@@ -14,6 +14,7 @@ static NSMutableArray * KTSolverLegalMoves = nil;
 
 static NSUInteger backtracks = 0;
 
+
 @implementation KTSolver
 
 + (KTBoard *)serialSolverForBoard:(KTBoard *)board
@@ -24,7 +25,7 @@ static NSUInteger backtracks = 0;
 	[board setTileAt:start
 			 toValue:iter];
 	
-	if(iter==(board.size.dimensions.x+1)*(board.size.dimensions.y+1)-1) {
+	if(iter==(board.size.dimensions.x)*(board.size.dimensions.y)-1) {
 		return board; // end of the line
 	}
 	
@@ -47,6 +48,7 @@ static NSUInteger backtracks = 0;
 	[board setTileAt:start
 			 toValue:-1];
 	
+	[pool drain];
 	[pool release];
 	
 	++backtracks;

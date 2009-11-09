@@ -14,6 +14,8 @@
 		DA433EE8109784A80011CA77 /* KTBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = DA433EE7109784A70011CA77 /* KTBoard.m */; };
 		DAA25D3310A50A0500573D1A /* FSLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA29693410A1227D00AE9B3C /* FSLibrary.framework */; };
 		DAB0A24810A511F6001B2364 /* KTSolver.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB0A24710A511F6001B2364 /* KTSolver.m */; };
+		DABAA0F810A69DD8009C794F /* KTThreadController.m in Sources */ = {isa = PBXBuildFile; fileRef = DABAA0F710A69DD8009C794F /* KTThreadController.m */; };
+		DABAA11210A6A1EC009C794F /* KTThreadSolver.m in Sources */ = {isa = PBXBuildFile; fileRef = DABAA11110A6A1EC009C794F /* KTThreadSolver.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +61,10 @@
 		DA433EE7109784A70011CA77 /* KTBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTBoard.m; sourceTree = "<group>"; };
 		DAB0A24610A511F6001B2364 /* KTSolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTSolver.h; sourceTree = "<group>"; };
 		DAB0A24710A511F6001B2364 /* KTSolver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTSolver.m; sourceTree = "<group>"; };
+		DABAA0F610A69DD8009C794F /* KTThreadController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTThreadController.h; sourceTree = "<group>"; };
+		DABAA0F710A69DD8009C794F /* KTThreadController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTThreadController.m; sourceTree = "<group>"; };
+		DABAA11010A6A1EC009C794F /* KTThreadSolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTThreadSolver.h; sourceTree = "<group>"; };
+		DABAA11110A6A1EC009C794F /* KTThreadSolver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTThreadSolver.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +102,10 @@
 				DA433EE7109784A70011CA77 /* KTBoard.m */,
 				DAB0A24610A511F6001B2364 /* KTSolver.h */,
 				DAB0A24710A511F6001B2364 /* KTSolver.m */,
+				DABAA0F610A69DD8009C794F /* KTThreadController.h */,
+				DABAA0F710A69DD8009C794F /* KTThreadController.m */,
+				DABAA11010A6A1EC009C794F /* KTThreadSolver.h */,
+				DABAA11110A6A1EC009C794F /* KTThreadSolver.m */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -207,6 +217,8 @@
 				8DD76F9A0486AA7600D96B5E /* Knights Tour.m in Sources */,
 				DA433EE8109784A80011CA77 /* KTBoard.m in Sources */,
 				DAB0A24810A511F6001B2364 /* KTSolver.m in Sources */,
+				DABAA0F810A69DD8009C794F /* KTThreadController.m in Sources */,
+				DABAA11210A6A1EC009C794F /* KTThreadSolver.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,7 +257,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_OBJC_GC = unsupported;
+				GCC_ENABLE_OBJC_GC = supported;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -261,7 +273,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_OBJC_GC = unsupported;
+				GCC_ENABLE_OBJC_GC = supported;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;

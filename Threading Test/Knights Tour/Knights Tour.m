@@ -8,11 +8,15 @@
 
 #import <FSLibrary/FSLog.h>
 #import <FSLibrary/FSGeometry.h>
+#import <time.h>
+#import <sys/time.h>
 
 #import "KTBoard.h"
 #import "KTSolver.h"
+#import "KTThreadController.h"
 
 int main (int argc, const char * argv[]) {
+	objc_startCollectorThread();
     NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
 	FSLogSetUpDefaults();
 
@@ -42,19 +46,53 @@ int main (int argc, const char * argv[]) {
 	[args setBool:YES forKey:@"a"];
 	
 	if([args boolForKey:@"e"]) {
-		KTBoard * ex = [[KTBoard alloc] initWithFSSize:[[[FSPoint alloc] initWithX:8 y:8] autorelease]
+		KTBoard * ex = [[KTBoard alloc] initWithFSSize:[[[FSPoint alloc]
+														 initWithX:8
+														 y:8]
+														autorelease]
 						];
-		NSMutableString * turk = [[NSMutableString alloc] initWithString:@" d4 f5 d6 e8 c7 a8 b6 a4 b2 d1 f2 h1 g3 h5 g7 e6 f8 d7 b8 a6 b4 a2 c1 e2 g1 h3 f4 d3 c5 e4 c3 d5 e3 c4 e5 c6 d8 b7 a5 b3 a1 c2 e1 g2 h4 g6 h8 f7 h6 g4 h2 f1 d2 b1 a3 b5 a7 c8 e7 g8 f6 h7 g5 f3 "];
-		[turk replaceOccurrencesOfString:@"a" withString:@"1 " options:NSCaseInsensitiveSearch range:NSMakeRange(0, [turk length])];
-		[turk replaceOccurrencesOfString:@"b" withString:@"2 " options:NSCaseInsensitiveSearch range:NSMakeRange(0, [turk length])];
-		[turk replaceOccurrencesOfString:@"c" withString:@"3 " options:NSCaseInsensitiveSearch range:NSMakeRange(0, [turk length])];
-		[turk replaceOccurrencesOfString:@"d" withString:@"4 " options:NSCaseInsensitiveSearch range:NSMakeRange(0, [turk length])];
-		[turk replaceOccurrencesOfString:@"e" withString:@"5 " options:NSCaseInsensitiveSearch range:NSMakeRange(0, [turk length])];
-		[turk replaceOccurrencesOfString:@"f" withString:@"6 " options:NSCaseInsensitiveSearch range:NSMakeRange(0, [turk length])];
-		[turk replaceOccurrencesOfString:@"g" withString:@"7 " options:NSCaseInsensitiveSearch range:NSMakeRange(0, [turk length])];
-		[turk replaceOccurrencesOfString:@"h" withString:@"8 " options:NSCaseInsensitiveSearch range:NSMakeRange(0, [turk length])];
+		NSMutableString * turk = [[NSMutableString alloc]
+								  initWithString:@" d4 f5 d6 e8 c7 a8 b"
+								  @"6 a4 b2 d1 f2 h1 g3 h5 g7 e6 f8 d7 "
+								  @"b8 a6 b4 a2 c1 e2 g1 h3 f4 d3 c5 e4"
+								  @" c3 d5 e3 c4 e5 c6 d8 b7 a5 b3 a1 c"
+								  @"2 e1 g2 h4 g6 h8 f7 h6 g4 h2 f1 d2 "
+								  @"b1 a3 b5 a7 c8 e7 g8 f6 h7 g5 f3 "];
+		[turk replaceOccurrencesOfString:@"a"
+							  withString:@"1 "
+								 options:NSCaseInsensitiveSearch
+								   range:NSMakeRange(0, [turk length])];
+		[turk replaceOccurrencesOfString:@"b"
+							  withString:@"2 "
+								 options:NSCaseInsensitiveSearch
+								   range:NSMakeRange(0, [turk length])];
+		[turk replaceOccurrencesOfString:@"c"
+							  withString:@"3 "
+								 options:NSCaseInsensitiveSearch
+								   range:NSMakeRange(0, [turk length])];
+		[turk replaceOccurrencesOfString:@"d"
+							  withString:@"4 "
+								 options:NSCaseInsensitiveSearch
+								   range:NSMakeRange(0, [turk length])];
+		[turk replaceOccurrencesOfString:@"e"
+							  withString:@"5 "
+								 options:NSCaseInsensitiveSearch
+								   range:NSMakeRange(0, [turk length])];
+		[turk replaceOccurrencesOfString:@"f"
+							  withString:@"6 "
+								 options:NSCaseInsensitiveSearch
+								   range:NSMakeRange(0, [turk length])];
+		[turk replaceOccurrencesOfString:@"g"
+							  withString:@"7 "
+								 options:NSCaseInsensitiveSearch
+								   range:NSMakeRange(0, [turk length])];
+		[turk replaceOccurrencesOfString:@"h"
+							  withString:@"8 "
+								 options:NSCaseInsensitiveSearch
+								   range:NSMakeRange(0, [turk length])];
 		
-		NSScanner * scanner = [[NSScanner alloc] initWithString:[turk autorelease]];
+		NSScanner * scanner = [[NSScanner alloc] initWithString:
+							   [turk autorelease]];
 		FSPoint * p; NSInteger xx, yy; NSInteger cursor=0;
 		
 		NSString * tmp;
@@ -71,7 +109,8 @@ int main (int argc, const char * argv[]) {
 		
 		[scanner release];
 		
-		FSLog2(FSLogLevelInfo, @"\n%@",[[ex autorelease] generateSvg:[args boolForKey:@"a"]]);
+		FSLog2(FSLogLevelInfo, @"\n%@",[[ex autorelease]
+										generateSvg:[args boolForKey:@"a"]]);
 		
 		return 0;
 	}
@@ -91,7 +130,8 @@ int main (int argc, const char * argv[]) {
 	dim = dimensions.dimensions;
 	
 	if(dim.x < 5 || dim.y < 5) {
-		FSLog2(FSLogLevelError, @"Given board %@ is too small, try something a bit bigger.",dim);
+		FSLog2(FSLogLevelError, @"Given board %@ is too small, try something"
+			   @" a bit bigger.",dim);
 		[startingLocation release];
 		[dimensions release];
 		return -1;
@@ -149,24 +189,34 @@ int main (int argc, const char * argv[]) {
 	
 	KTBoard * b = [[KTBoard alloc] initWithFSSize:dim];
 	
-	FSLog2(FSLogLevelInfo,@"the board looks like:\n%@",b);
+	clock_t t_start;
+	clock_t t_end;
 	
-	// + (NSTimer *)timerWithTimeInterval:(NSTimeInterval)seconds invocation:(NSInvocation *)invocation repeats:(BOOL)repeats
-	
-//	NSTimer * displayLoop = [NSTimer scheduledTimerWithTimeInterval:1.0f
-//														 invocation:[NSInvocation invocationWithMethodSignature:[b methodSignatureForSelector:@selector(showDescr)]]
-//															repeats:YES];
-	
-	//[b performSelector:@selector(showDescr) withObject:nil afterDelay:1.0f];
-	
-	KTBoard * serialResult = [[KTSolver serialSolverForBoard:b startingPoint:startingLocation iteration:0] retain];
-	
-//	[displayLoop invalidate];
-	
-	FSLog2(FSLogLevelInfo, @"Serial result: \n%@",[serialResult generateSvg:[args boolForKey:@"a"]]);
+	t_start=clock();
+	KTBoard * serialResult = [[KTSolver serialSolverForBoard:b
+											   startingPoint:startingLocation
+												   iteration:0]
+							  retain];
+	t_end=clock();
+//	time_t diff = difftime(t_start, t_end);
+	FSLog2(FSLogLevelInfo, @"Found serial result in %d clocks",t_end-t_start);
+	FSLog2(FSLogLevelInfo, @"Serial result: \n%@",[serialResult
+												   generateSvg:
+												   [args boolForKey:@"a"]]);
 	
 	[serialResult release];
 	[b release];
+	
+	b = [[KTBoard alloc] initWithFSSize:dim];
+	
+	KTThreadController * t = [[KTThreadController alloc] initWithBoard:b startingLocation:startingLocation];
+	[t run];
+	while(![t finished]) {
+		[NSThread sleepForTimeInterval:1.0f];
+	}
+	
+	[b release];
+	
 	[startingLocation release];
 	[dimensions release];
 	

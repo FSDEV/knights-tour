@@ -70,8 +70,10 @@ static NSMutableArray * KTBoardLegalMoves = nil;
 	if(self=[super init]) {
 		_size = [[FSRect alloc] initWithOrigin:[[[FSPoint alloc] initWithX:0 y:0] autorelease]
 									dimensions:size];
-		_tiles = [[NSMutableArray alloc] initWithCapacity:(_size.dimensions.x+1) * (_size.dimensions.y+1)];
-		_graph = [[NSMutableArray alloc] initWithCapacity:(_size.dimensions.x+1) * (_size.dimensions.y+1)];
+		_tiles = [[NSMutableArray alloc] initWithCapacity:(_size.dimensions.x+1) *
+				  (_size.dimensions.y+1)];
+		_graph = [[NSMutableArray alloc] initWithCapacity:(_size.dimensions.x+1) *
+				  (_size.dimensions.y+1)];
 		for(size_t i=0; i < _size.dimensions.x * _size.dimensions.y; ++i) {
 			[_tiles addObject:[NSNumber numberWithInteger:-1]];
 		}
@@ -79,7 +81,8 @@ static NSMutableArray * KTBoardLegalMoves = nil;
 		for(size_t x=0; x < _size.dimensions.x; ++x) {
 			for(size_t y=0; y < _size.dimensions.y; ++y) {
 				p = [[FSPoint alloc] initWithX:x y:y];
-				[_graph addObject:[NSNumber numberWithInteger:[[self getBranchesForPoint:p] count]]];
+				[_graph addObject:[NSNumber numberWithInteger:[[self getBranchesForPoint:p]
+															   count]]];
 				[p release];
 			}
 		}
@@ -89,6 +92,7 @@ static NSMutableArray * KTBoardLegalMoves = nil;
 - (id)initWithBoard:(KTBoard *)board {
 	if(self=[super init]) {
 		_tiles = [[NSMutableArray arrayWithArray:board.tiles] retain];
+		_graph = [[NSMutableArray arrayWithArray:board.graph] retain];
 		_size = [board.size retain];
 	}
 	return self;
@@ -110,7 +114,8 @@ static NSMutableArray * KTBoardLegalMoves = nil;
 	
 	// 
 	
-	return [NSMutableArray arrayWithArray:[[self getBranchesForPoint:p] sortedArrayUsingComparator:finderSort]];
+	return [NSMutableArray arrayWithArray:[[self getBranchesForPoint:p]
+										   sortedArrayUsingComparator:finderSort]];
 }
 
 - (NSMutableArray *)getBranchesForPoint:(FSPoint *)p {
@@ -147,7 +152,9 @@ static NSMutableArray * KTBoardLegalMoves = nil;
 - (void)setTileAt:(FSPoint *)p
 		  toValue:(NSInteger)i {
 	if(![self.size hasFSPoint:p]) {
-		FSLog2(FSLogLevelError, @"Request to set tile for %@ on board of size %@ failed!", p, _size.dimensions);
+		FSLog2(FSLogLevelError, @"Request to set tile for %@ on board of size %@ failed!",
+			   p, 
+			   _size.dimensions);
 		return;
 	}
 	[_tiles replaceObjectAtIndex:[p vectorizeWithGrid:_size.dimensions]
@@ -160,7 +167,9 @@ static NSMutableArray * KTBoardLegalMoves = nil;
 	FSPoint * p = [[FSPoint alloc] initWithX:xx
 										   y:yy];
 	if(![self.size hasFSPoint:p]) {
-		FSLog2(FSLogLevelError, @"Request to set tile for %@ on board of size %@ failed!", p, _size.dimensions);
+		FSLog2(FSLogLevelError, @"Request to set tile for %@ on board of size %@ failed!",
+			   p,
+			   _size.dimensions);
 		[p release];
 		return;
 	}
@@ -227,8 +236,10 @@ static NSMutableArray * KTBoardLegalMoves = nil;
 	[pool0 release];
 	
 	[svg appendString:@"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n"];
-	[svg appendString:@"<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n\n"];
-	[svg appendFormat:@"<svg width=\"%d\" height=\"%d\" version=\"1.1\" viewBox=\"0 0 %d %d\" xmlns=\"http://www.w3.org/2000/svg\" onload=\"initGraphic()\">\n",
+	[svg appendString:@"<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.o"
+					  @"rg/Graphics/SVG/1.1/DTD/svg11.dtd\">\n\n"];
+	[svg appendFormat:@"<svg width=\"%d\" height=\"%d\" version=\"1.1\" viewBox=\"0 0 %d %"
+					  @"d\" xmlns=\"http://www.w3.org/2000/svg\" onload=\"initGraphic()\">\n",
 	 (KTBoardPadding * 2)+(_size.dimensions.x * KTBoardScale),
 	 (KTBoardPadding * 2)+(_size.dimensions.y * KTBoardScale),
 	 (KTBoardPadding * 2)+(_size.dimensions.x * KTBoardScale),
@@ -255,7 +266,8 @@ static NSMutableArray * KTBoardLegalMoves = nil;
 		 ];
 	
 	[svg appendString:@"            <g transform=\"translate(0.5,0.5)\">\n"];
-	[svg appendFormat:@"                <circle cx=\"%d\" cy=\"%d\" r=\"0.1\" stroke=\"none\" fill=\"black\" />\n",
+	[svg appendFormat:@"                <circle cx=\"%d\" cy=\"%d\" r=\"0.1\" stroke=\""
+					  @"none\" fill=\"black\" />\n",
 	 [[orderedPoints objectAtIndex:0] x],
 	 [[orderedPoints objectAtIndex:0] y]
 	 ];
@@ -272,7 +284,8 @@ static NSMutableArray * KTBoardLegalMoves = nil;
 		 ];
 	}
 	
-	[svg appendFormat:@"                <polyline id=\"tourpath\" points=\"%@\" stroke=\"black\" stroke-width=\"0.05\" fill=\"none\" />\n",
+	[svg appendFormat:@"                <polyline id=\"tourpath\" points=\"%@\" stroke=\""
+					  @"black\" stroke-width=\"0.05\" fill=\"none\" />\n",
 	 [pathstring autorelease]
 	 ];
 	CGFloat y1, y2, x1, x2;
@@ -284,16 +297,20 @@ static NSMutableArray * KTBoardLegalMoves = nil;
 	CGFloat arrowAngle = (CGFloat)atan2(x1 - x2,
 										y1 - y2) * 57.2957795f / atan2(1.0f, 1.0f);
 	
-	[svg appendFormat:@"                <g transform=\"translate%@ scale(0.025) rotate(%f)\">\n",[orderedPoints lastObject],arrowAngle];
-	[svg appendString:@"                    <path d=\"M5,0 L-10,5 A3,5 0 0,0 -10,-5\" stroke=\"none\" fill=\"black\" />\n"];
+	[svg appendFormat:@"                <g transform=\"translate%@ scale(0.025) rotate(%"
+					  @"f)\">\n",[orderedPoints lastObject],arrowAngle];
+	[svg appendString:@"                    <path d=\"M5,0 L-10,5 A3,5 0 0,0 -10,-5\" st"
+					  @"roke=\"none\" fill=\"black\" />\n"];
 	[svg appendString:@"                </g>\n"];
 	if(animated) {
 		[svg appendString:@"                <g transform=\"translate(-0.375,0.225)\">\n"];
 		[svg appendString:@"                    <g>\n"];
 		[svg appendString:@"                        <g transform=\"scale(0.75)\">\n"];
-		[svg appendString:@"                            <text fill=\"red\" font-size=\"1\">♞</text>\n"];
+		[svg appendString:@"                            <text fill=\"red\" font-size=\""
+						  @"1\">♞</text>\n"];
 		[svg appendString:@"                        </g>\n"];
-		[svg appendFormat:@"                        <animateMotion path=\"%@\" dur=\"%ds\" fill=\"freeze\" repeatCount=\"indefinite\" />\n",
+		[svg appendFormat:@"                        <animateMotion path=\"%@\" dur=\"%ds"
+						  @"\" fill=\"freeze\" repeatCount=\"indefinite\" />\n",
 		 [animString substringToIndex:[animString length] -2],
 		 [orderedPoints count] + 1
 		 ];
