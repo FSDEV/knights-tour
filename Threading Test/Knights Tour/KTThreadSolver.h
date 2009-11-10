@@ -11,17 +11,25 @@
 
 #import "KTBoard.h"
 
+void reset_solver();
+
 @interface KTThreadSolver : NSObject {
 	KTBoard * _board;
 	FSPoint * _start;
 	NSInteger _iter;
+	BOOL _dispatch;
 	__weak id _dg;
 }
 
-- (id)initWithBoard:(KTBoard *)board
-   startingLocation:(FSPoint *)start
-		  iteration:(NSNumber *)iter
-		   delegate:(id)dg;
+- (id)initThreadedWithBoard:(KTBoard *)board
+		   startingLocation:(FSPoint *)start
+				  iteration:(NSNumber *)iter
+				   delegate:(id)dg;
+
+- (id)initDispatchWithBoard:(KTBoard *)board
+		   startingLocation:(FSPoint *)start
+				  iteration:(NSNumber *)iter
+				   delegate:(id)dg;
 
 - (void)solve;
 

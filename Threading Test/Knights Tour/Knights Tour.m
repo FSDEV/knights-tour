@@ -212,8 +212,30 @@ int main (int argc, const char * argv[]) {
 	KTThreadController * t = [[KTThreadController alloc] initWithBoard:b
 													  startingLocation:startingLocation];
 
+	FSLog2(FSLogLevelInfo, @"threaded:");
+	
 	[[[[NSThread alloc] initWithTarget:t
-							  selector:@selector(run)
+							  selector:@selector(runDispatch)
+								object:nil]
+	  autorelease]
+	 start];
+	
+	while(![t finished]) {
+		[NSThread sleepForTimeInterval:1.0f];
+	}
+	
+	[b release];
+	[t release];
+	
+	b = [[KTBoard alloc] initWithFSSize:dim];
+	
+	t = [[KTThreadController alloc] initWithBoard:b
+								 startingLocation:startingLocation];
+	
+	FSLog2(FSLogLevelInfo, @"dispatch:");
+	
+	[[[[NSThread alloc] initWithTarget:t
+							  selector:@selector(runThreaded)
 								object:nil]
 	  autorelease]
 	 start];

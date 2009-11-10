@@ -13,16 +13,36 @@ static NSUInteger activeThreads = 0;
 static BOOL solutionFound = NO;
 static CGFloat sleepTime = 0.001;
 
+void reset_solver() {
+	activeThreads=0;
+	solutionFound=NO;
+}
+
 @implementation KTThreadSolver
 
-- (id)initWithBoard:(KTBoard *)board
-   startingLocation:(FSPoint *)start
-		  iteration:(NSNumber *)iter
-		   delegate:(id)dg {
+- (id)initThreadedWithBoard:(KTBoard *)board
+		   startingLocation:(FSPoint *)start
+				  iteration:(NSNumber *)iter
+				   delegate:(id)dg {
 	if(self=[super init]) {
 		_board = [board retain];
 		_start = [start retain];
 		_iter = [iter integerValue];
+		_dispatch = NO;
+		_dg = dg;
+	}
+	return self;
+}
+
+- (id)initDispatchWithBoard:(KTBoard *)board
+		   startingLocation:(FSPoint *)start
+				  iteration:(NSNumber *)iter
+				   delegate:(id)dg {
+	if(self=[super init]) {
+		_board = [board retain];
+		_start = [start retain];
+		_iter = [iter integerValue];
+		_dispatch = YES;
 		_dg = dg;
 	}
 	return self;
@@ -45,7 +65,8 @@ static CGFloat sleepTime = 0.001;
 		solutionFound = YES;
 		[_dg foundSolution:_board];
 		--activeThreads;
-		[NSThread exit];
+		if(!_dispatch)
+			[NSThread exit];
 		return;
 	}
 	
@@ -57,28 +78,40 @@ static CGFloat sleepTime = 0.001;
 	while([branches count]>0) {
 		if(solutionFound) {
 			--activeThreads;
+			if(!_dispatch)
+				[NSThread exit];
 			return;
 		}
 		
-		if(activeThreads>=maxThreads) { // essentially, if the maximum number of threads has been
-			call = [[KTThreadSolver alloc] initWithBoard:_board // reached, then use a serial solver
-										startingLocation:[branches lastObject]
-											   iteration:[NSNumber numberWithInteger:_iter+1]
-												delegate:_dg];
-			[call solve];
-		} else {
+		if(_dispatch)
+			call =
+			[[KTThreadSolver alloc] initDispatchWithBoard:[[KTBoard alloc] initWithBoard:_board]
+										 startingLocation:[branches lastObject]
+												iteration:[NSNumber numberWithInteger:_iter+1]
+												 delegate:_dg];
+		else
 			call = // but if there are still threads to be made, then use a parallel solver
-			[[KTThreadSolver alloc] initWithBoard:[[KTBoard alloc] initWithBoard:_board]
-								 startingLocation:[branches lastObject]
-										iteration:[NSNumber numberWithInteger:_iter+1]
-										 delegate:_dg];
-			
-			[[[NSThread alloc] initWithTarget:call selector:@selector(solve) object:nil] start];
-		}
+			[[KTThreadSolver alloc] initThreadedWithBoard:[[KTBoard alloc] initWithBoard:_board]
+										 startingLocation:[branches lastObject]
+												iteration:[NSNumber numberWithInteger:_iter+1]
+												 delegate:_dg];
+
+		
+		if(activeThreads>=maxThreads) // essentially, if the maximum number of threads has been
+			[call solve];
+		else
+			if(_dispatch)
+				dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0),
+							   ^{ [call solve]; });
+			else
+				[[[NSThread alloc] initWithTarget:call
+										 selector:@selector(solve)
+										   object:nil]
+				 start];
 		
 		[branches removeLastObject];
 		
-		[NSThread sleepForTimeInterval:sleepTime];
+		//[NSThread sleepForTimeInterval:sleepTime];
 	}
 	
 	skipLoop:
@@ -91,7 +124,8 @@ static CGFloat sleepTime = 0.001;
 	
 	--activeThreads;
 	
-	[NSThread exit];
+	if(!_dispatch)
+		[NSThread exit];
 	
 	return;
 }

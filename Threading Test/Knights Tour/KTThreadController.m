@@ -19,6 +19,7 @@
 		_board = [board retain];
 		_start = [start retain];
 		_finished = NO;
+		reset_solver();
 	}
 	return self;
 }
@@ -30,18 +31,27 @@
 	[super dealloc];
 }
 
-- (void)run {
+- (void)runThreaded {
 	t_start=clock();
-	_solver = [[KTThreadSolver alloc] initWithBoard:_board
-								   startingLocation:_start
-										  iteration:[NSNumber numberWithInteger:0]
-										   delegate:self];
+	_solver = [[KTThreadSolver alloc] initThreadedWithBoard:_board
+										   startingLocation:_start
+												  iteration:[NSNumber numberWithInteger:0]
+												   delegate:self];
+	[_solver solve];
+}
+
+- (void)runDispatch {
+	t_start=clock();
+	_solver = [[KTThreadSolver alloc] initDispatchWithBoard:_board
+										   startingLocation:_start
+												  iteration:[NSNumber numberWithInteger:0]
+												   delegate:self];
 	[_solver solve];
 }
 
 - (void)foundSolution:(KTBoard *)board {
 	t_end=clock();
-	FSLog2(FSLogLevelInfo, @"Found solution using threads, took %d clocks.",t_end-t_start);
+	FSLog2(FSLogLevelInfo, @"Found solution, took %d clocks.",t_end-t_start);
 	FSLog2(FSLogLevelInfo, @"SVG of board: \n%@",[board generateSvg:YES]);
 	_finished = YES;
 }

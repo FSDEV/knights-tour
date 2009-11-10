@@ -344,7 +344,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>12</integer>
+									<integer>4</integer>
 									<integer>2</integer>
 									<integer>0</integer>
 								</array>
@@ -387,7 +387,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>KTThreadSolver.m</string>
+								<string>Knights Tour.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -395,11 +395,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>KTThreadSolver.m</string>
+										<string>Knights Tour.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>DA3BB83D10A80BF8003E94A4</string>
+										<string>DAF2C6B510A8B958001A67B5</string>
 										<key>history</key>
 										<array>
 											<string>DA296AA710A12CC000AE9B3C</string>
@@ -407,14 +407,14 @@
 											<string>DABAA1A110A6B414009C794F</string>
 											<string>DA3BB82D10A80AD7003E94A4</string>
 											<string>DA3BB82E10A80AD7003E94A4</string>
-											<string>DA3BB82F10A80AD7003E94A4</string>
 											<string>DA3BB83010A80AD7003E94A4</string>
 											<string>DA3BB83110A80AD7003E94A4</string>
-											<string>DA3BB83210A80AD7003E94A4</string>
 											<string>DA3BB83310A80AD7003E94A4</string>
-											<string>DA3BB83410A80AD7003E94A4</string>
 											<string>DA3BB83510A80AD7003E94A4</string>
-											<string>DA3BB83610A80AD7003E94A4</string>
+											<string>DA26660E10A812CD00C1FEB1</string>
+											<string>DA26660F10A812CD00C1FEB1</string>
+											<string>DA26661010A812CD00C1FEB1</string>
+											<string>DA26661210A812CD00C1FEB1</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -472,9 +472,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>DA3BB81310A7A43C003E94A4</string>
+				<string>DAF2C6B610A8B958001A67B5</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>DA3BB81410A7A43C003E94A4</string>
+				<string>DAF2C6B710A8B958001A67B5</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -595,7 +595,7 @@
 	<key>StatusbarIsVisible</key>
 	<true/>
 	<key>TimeStamp</key>
-	<real>279448568.19192201</real>
+	<real>279492952.16078901</real>
 	<key>ToolbarConfigUserDefaultsMinorVersion</key>
 	<string>2</string>
 	<key>ToolbarDisplayMode</key>
@@ -612,13 +612,9 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>DA3BB83E10A80BF8003E94A4</string>
-		<string>DA3BB81E10A7A43C003E94A4</string>
-		<string>DA3BB81F10A7A43C003E94A4</string>
-		<string>/Users/cmiller/Code/knights-tour/Threading Test/Knights Tour/Knights Tour.xcodeproj</string>
 		<string>DA433FC51097CF690011CA77</string>
-		<string>1C78EAAD065D492600B07095</string>
 		<string>1CD10A99069EF8BA00B06720</string>
+		<string>/Users/cmiller/Code/knights-tour/Threading Test/Knights Tour/Knights Tour.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
 	<string>0 59 1280 719 0 0 1280 778 </string>
@@ -659,8 +655,6 @@
 							<string>218pt</string>
 						</dict>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -700,7 +694,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>DA433FC51097CF690011CA77</string>
-				<string>DA3BB81510A7A43C003E94A4</string>
+				<string>DAF2C6B810A8B958001A67B5</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -713,7 +707,7 @@
 			<key>WindowToolGUID</key>
 			<string>DA433FC51097CF690011CA77</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>FirstTimeWindowDisplayed</key>
@@ -822,13 +816,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>DA3BB81610A7A43C003E94A4</string>
+				<string>DAF2C6B910A8B958001A67B5</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>DA3BB81710A7A43C003E94A4</string>
-				<string>DA3BB81810A7A43C003E94A4</string>
-				<string>DA3BB81910A7A43C003E94A4</string>
-				<string>DA3BB81A10A7A43C003E94A4</string>
-				<string>DA3BB81B10A7A43C003E94A4</string>
+				<string>DAF2C6BA10A8B958001A67B5</string>
+				<string>DAF2C6BB10A8B958001A67B5</string>
+				<string>DAF2C6BC10A8B958001A67B5</string>
+				<string>DAF2C6BD10A8B958001A67B5</string>
+				<string>DAF2C6BE10A8B958001A67B5</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -992,7 +986,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C78EAAD065D492600B07095</string>
-				<string>DA3BB81C10A7A43C003E94A4</string>
+				<string>DA26661C10A812CD00C1FEB1</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>

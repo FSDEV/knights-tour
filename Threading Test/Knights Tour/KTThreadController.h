@@ -28,7 +28,8 @@
 - (id)initWithBoard:(KTBoard *)board
    startingLocation:(FSPoint *)start;
 
-- (void)run;
+- (void)runThreaded;
+- (void)runDispatch;
 
 - (void)foundSolution:(KTBoard *)board;
 
