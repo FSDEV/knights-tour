@@ -52,7 +52,7 @@
 		08FB7796FE84155DC02AAC07 /* Knights Tour.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Knights Tour.m"; sourceTree = "<group>"; };
 		08FB779EFE84155DC02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32A70AAB03705E1F00C91783 /* Knights Tour_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Knights Tour_Prefix.pch"; sourceTree = "<group>"; };
-		8DD76FA10486AA7600D96B5E /* Knights Tour */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Knights Tour"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8DD76FA10486AA7600D96B5E /* knights-tour */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "knights-tour"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6859EA3029092ED04C91782 /* Knights Tour.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = "Knights Tour.1"; sourceTree = "<group>"; };
 		DA29693410A1227D00AE9B3C /* FSLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FSLibrary.framework; path = /Library/Frameworks/FSLibrary.framework; sourceTree = "<absolute>"; };
 		DA296A4E10A1253700AE9B3C /* Library.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Library.xcodeproj; path = /Users/cmiller/Code/Library/Library.xcodeproj; sourceTree = "<absolute>"; };
@@ -123,7 +123,7 @@
 		1AB674ADFE9D54B511CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8DD76FA10486AA7600D96B5E /* Knights Tour */,
+				8DD76FA10486AA7600D96B5E /* knights-tour */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -163,7 +163,7 @@
 			name = "Knights Tour";
 			productInstallPath = "$(HOME)/bin";
 			productName = "Knights Tour";
-			productReference = 8DD76FA10486AA7600D96B5E /* Knights Tour */;
+			productReference = 8DD76FA10486AA7600D96B5E /* knights-tour */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -236,7 +236,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Knights Tour_Prefix.pch";
 				INSTALL_PATH = /usr/local/bin;
-				PRODUCT_NAME = "Knights Tour";
+				PRODUCT_NAME = "knights-tour";
 			};
 			name = Debug;
 		};
@@ -248,7 +248,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Knights Tour_Prefix.pch";
 				INSTALL_PATH = /usr/local/bin;
-				PRODUCT_NAME = "Knights Tour";
+				PRODUCT_NAME = "knights-tour";
 			};
 			name = Release;
 		};

@@ -43,7 +43,7 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					315,
+					833,
 					20,
 					48,
 					43,
@@ -102,6 +102,14 @@
 			DAF12E5F10AA248500F2B3C3 /* PBXTextBookmark */ = DAF12E5F10AA248500F2B3C3 /* PBXTextBookmark */;
 			DAF12E6010AA248500F2B3C3 /* XCBuildMessageTextBookmark */ = DAF12E6010AA248500F2B3C3 /* XCBuildMessageTextBookmark */;
 			DAF12E6110AA248500F2B3C3 /* PBXTextBookmark */ = DAF12E6110AA248500F2B3C3 /* PBXTextBookmark */;
+			DAF12E9110AA4C9D00F2B3C3 /* PBXTextBookmark */ = DAF12E9110AA4C9D00F2B3C3 /* PBXTextBookmark */;
+			DAF12E9210AA4C9D00F2B3C3 /* PBXTextBookmark */ = DAF12E9210AA4C9D00F2B3C3 /* PBXTextBookmark */;
+			DAF12E9310AA4C9D00F2B3C3 /* PBXTextBookmark */ = DAF12E9310AA4C9D00F2B3C3 /* PBXTextBookmark */;
+			DAF12E9410AA4C9D00F2B3C3 /* PBXTextBookmark */ = DAF12E9410AA4C9D00F2B3C3 /* PBXTextBookmark */;
+			DAF12E9510AA4C9D00F2B3C3 /* PBXTextBookmark */ = DAF12E9510AA4C9D00F2B3C3 /* PBXTextBookmark */;
+			DAF12E9610AA4C9D00F2B3C3 /* PBXTextBookmark */ = DAF12E9610AA4C9D00F2B3C3 /* PBXTextBookmark */;
+			DAF12E9710AA4C9D00F2B3C3 /* PBXTextBookmark */ = DAF12E9710AA4C9D00F2B3C3 /* PBXTextBookmark */;
+			DAF12E9810AA4C9D00F2B3C3 /* PBXTextBookmark */ = DAF12E9810AA4C9D00F2B3C3 /* PBXTextBookmark */;
 			DAF2C6B510A8B958001A67B5 = DAF2C6B510A8B958001A67B5 /* PBXTextBookmark */;
 		};
 		sourceControlManager = DA433EC8109780010011CA77 /* Source Control */;
@@ -110,9 +118,9 @@
 	};
 	08FB7796FE84155DC02AAC07 /* Knights Tour.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1011, 4096}}";
-			sepNavSelRange = "{7536, 0}";
-			sepNavVisRange = "{6622, 980}";
+			sepNavIntBoundsRect = "{{0, 0}, {1011, 3968}}";
+			sepNavSelRange = "{1515, 0}";
+			sepNavVisRange = "{345, 1297}";
 			sepNavWindowFrame = "{{15, 15}, {906, 758}}";
 		};
 	};
@@ -170,8 +178,8 @@
 		isa = PBXTextBookmark;
 		fRef = 08FB7796FE84155DC02AAC07 /* Knights Tour.m */;
 		name = "Knights Tour.m: 219";
-		rLen = 2;
-		rLoc = 7197;
+		rLen = 0;
+		rLoc = 7910;
 		rType = 0;
 		vrLen = 914;
 		vrLoc = 6419;
@@ -276,6 +284,30 @@
 		sourceDirectories = (
 		);
 		variableFormatDictionary = {
+			$cs = 1;
+			$ds = 1;
+			$eflags = 1;
+			$es = 1;
+			$fs = 1;
+			$gs = 1;
+			$r10 = 1;
+			$r11 = 1;
+			$r12 = 1;
+			$r13 = 1;
+			$r14 = 1;
+			$r15 = 1;
+			$r8 = 1;
+			$r9 = 1;
+			$rax = 1;
+			$rbp = 1;
+			$rbx = 1;
+			$rcx = 1;
+			$rdi = 1;
+			$rdx = 1;
+			$rip = 1;
+			$rsi = 1;
+			$rsp = 1;
+			$ss = 1;
 		};
 	};
 	DA433EC8109780010011CA77 /* Source Control */ = {
@@ -345,9 +377,9 @@
 	};
 	DABAA11110A6A1EC009C794F /* KTThreadSolver.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1011, 1952}}";
-			sepNavSelRange = "{2548, 0}";
-			sepNavVisRange = "{1446, 1280}";
+			sepNavIntBoundsRect = "{{0, 0}, {633, 2224}}";
+			sepNavSelRange = "{1100, 0}";
+			sepNavVisRange = "{1082, 242}";
 		};
 	};
 	DABAA19F10A6B414009C794F /* PBXTextBookmark */ = {
@@ -399,8 +431,8 @@
 		comments = "Redefinition of 't'";
 		fRef = 08FB7796FE84155DC02AAC07 /* Knights Tour.m */;
 		fallbackIsa = XCBuildMessageTextBookmark;
-		rLen = 1;
-		rLoc = 231;
+		rLen = 0;
+		rLoc = 239;
 		rType = 1;
 	};
 	DAF12E6110AA248500F2B3C3 /* PBXTextBookmark */ = {
@@ -408,17 +440,97 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* Knights Tour.m */;
 		name = "Knights Tour.m: 226";
 		rLen = 0;
-		rLoc = 7305;
+		rLoc = 7910;
 		rType = 0;
 		vrLen = 205;
 		vrLoc = 7156;
+	};
+	DAF12E9110AA4C9D00F2B3C3 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = DAB0A24610A511F6001B2364 /* KTSolver.h */;
+		name = "KTSolver.h: 16";
+		rLen = 0;
+		rLoc = 270;
+		rType = 0;
+		vrLen = 400;
+		vrLoc = 0;
+	};
+	DAF12E9210AA4C9D00F2B3C3 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = DABAA0F610A69DD8009C794F /* KTThreadController.h */;
+		name = "KTThreadController.h: 32";
+		rLen = 0;
+		rLoc = 613;
+		rType = 0;
+		vrLen = 661;
+		vrLoc = 0;
+	};
+	DAF12E9310AA4C9D00F2B3C3 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = DA433EE6109784A70011CA77 /* KTBoard.h */;
+		name = "KTBoard.h: 34";
+		rLen = 0;
+		rLoc = 821;
+		rType = 0;
+		vrLen = 947;
+		vrLoc = 0;
+	};
+	DAF12E9410AA4C9D00F2B3C3 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = DABAA11010A6A1EC009C794F /* KTThreadSolver.h */;
+		name = "KTThreadSolver.h: 14";
+		rLen = 19;
+		rLoc = 214;
+		rType = 0;
+		vrLen = 672;
+		vrLoc = 0;
+	};
+	DAF12E9510AA4C9D00F2B3C3 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = DABAA11110A6A1EC009C794F /* KTThreadSolver.m */;
+		name = "KTThreadSolver.m: 105";
+		rLen = 0;
+		rLoc = 2548;
+		rType = 0;
+		vrLen = 1280;
+		vrLoc = 1446;
+	};
+	DAF12E9610AA4C9D00F2B3C3 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = DABAA0F710A69DD8009C794F /* KTThreadController.m */;
+		name = "KTThreadController.m: 54";
+		rLen = 0;
+		rLoc = 1126;
+		rType = 0;
+		vrLen = 888;
+		vrLoc = 371;
+	};
+	DAF12E9710AA4C9D00F2B3C3 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB7796FE84155DC02AAC07 /* Knights Tour.m */;
+		name = "Knights Tour.m: 239";
+		rLen = 0;
+		rLoc = 7910;
+		rType = 0;
+		vrLen = 980;
+		vrLoc = 6622;
+	};
+	DAF12E9810AA4C9D00F2B3C3 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB7796FE84155DC02AAC07 /* Knights Tour.m */;
+		name = "Knights Tour.m: 41";
+		rLen = 0;
+		rLoc = 1515;
+		rType = 0;
+		vrLen = 1297;
+		vrLoc = 345;
 	};
 	DAF2C6B510A8B958001A67B5 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 08FB7796FE84155DC02AAC07 /* Knights Tour.m */;
 		name = "Knights Tour.m: 215";
 		rLen = 0;
-		rLoc = 7119;
+		rLoc = 7910;
 		rType = 0;
 		vrLen = 1447;
 		vrLoc = 3;

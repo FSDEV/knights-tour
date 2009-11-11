@@ -30,6 +30,8 @@ int main (int argc, const char * argv[]) {
 		FSLog2(FSLogLevelInfo, @"Command-line arguments:");
 		FSLog2(FSLogLevelInfo, @" -h   YES|NO      displays help text");
 		FSLog2(FSLogLevelInfo, @" -e   YES|NO      displays an example solution");
+		FSLog2(FSLogLevelInfo, @" -s   SERIAL|THREAD|DISPATCH");
+		FSLog2(FSLogLevelInfo, @"                  which solver mechanism to use");
 		FSLog2(FSLogLevelInfo, @" -w   INTEGER     width of the chessboard");
 		FSLog2(FSLogLevelInfo, @" -l   INTEGER     length of the chessboard");
 		FSLog2(FSLogLevelInfo, @" -sw  INTEGER     starting column for the solver");
@@ -37,13 +39,6 @@ int main (int argc, const char * argv[]) {
 		FSLog2(FSLogLevelInfo, @" -a   YES|NO      whether or not the SVG output will be animated");
 		return 0;
 	}
-	
-//	[args setBool:YES forKey:@"e"];
-	[args setInteger:8 forKey:@"w"];
-	[args setInteger:8 forKey:@"l"];
-	[args setInteger:0 forKey:@"sw"];
-	[args setInteger:0 forKey:@"sl"];
-	[args setBool:YES forKey:@"a"];
 	
 	if([args boolForKey:@"e"]) {
 		KTBoard * ex = [[KTBoard alloc] initWithFSSize:[[[FSPoint alloc]
@@ -184,64 +179,64 @@ int main (int argc, const char * argv[]) {
 	FSLog2(FSLogLevelInfo, @"starting position %@",startingLocation);
 	
 	//! TODO: solve stuff
-	
-	[NSThread setThreadPriority:0.5];
-	
 	KTBoard * b = [[KTBoard alloc] initWithFSSize:dim];
 	
-	clock_t t_start;
-	clock_t t_end;
-	
-	t_start=clock();
-	KTBoard * serialResult = [[KTSolver serialSolverForBoard:b
-											   startingPoint:startingLocation
-												   iteration:0]
-							  retain];
-	t_end=clock();
-
-	FSLog2(FSLogLevelInfo, @"Found serial result in %d clocks",(t_end-t_start));
-	FSLog2(FSLogLevelInfo, @"Serial result: \n%@",[serialResult
-												   generateSvg:
-												   [args boolForKey:@"a"]]);
-	
-	[serialResult release];
-	[b release];
-	
-	b = [[KTBoard alloc] initWithFSSize:dim];
-	
-	KTThreadController * t = [[KTThreadController alloc] initWithBoard:b
-													  startingLocation:startingLocation];
-
-	FSLog2(FSLogLevelInfo, @"threaded:");
-	
-	[[[[NSThread alloc] initWithTarget:t
-							  selector:@selector(runDispatch)
-								object:nil]
-	  autorelease]
-	 start];
-	
-	while(![t finished]) {
-		[NSThread sleepForTimeInterval:1.0f];
-	}
-	
-	[b release];
-	[t release];
-	
-	b = [[KTBoard alloc] initWithFSSize:dim];
-	
-	t = [[KTThreadController alloc] initWithBoard:b
-								 startingLocation:startingLocation];
-	
-	FSLog2(FSLogLevelInfo, @"dispatch:");
-	
-	[[[[NSThread alloc] initWithTarget:t
-							  selector:@selector(runThreaded)
-								object:nil]
-	  autorelease]
-	 start];
-	
-	while(![t finished]) {
-		[NSThread sleepForTimeInterval:1.0f];
+	if([[args stringForKey:@"s"] isEqualToString:@"SERIAL"]) {
+		clock_t t_start;
+		clock_t t_end;
+		
+		t_start=clock();
+		KTBoard * serialResult = [[KTSolver serialSolverForBoard:b
+												   startingPoint:startingLocation
+													   iteration:0]
+								  retain];
+		t_end=clock();
+		
+		FSLog2(FSLogLevelInfo, @"Found serial result in %d clocks",(t_end-t_start));
+		FSLog2(FSLogLevelInfo, @"Serial result: \n%@",[serialResult
+													   generateSvg:
+													   [args boolForKey:@"a"]]);
+		
+		[serialResult release];
+	} else if([[args stringForKey:@"s"] isEqualToString:@"THREAD"]) {
+		KTThreadController * t = [[KTThreadController alloc] initWithBoard:b
+														  startingLocation:startingLocation];
+		
+		FSLog2(FSLogLevelInfo, @"threaded:");
+		
+		[[[[NSThread alloc] initWithTarget:t
+								  selector:@selector(runDispatch)
+									object:nil]
+		  autorelease]
+		 start];
+		
+		while(![t finished]) {
+			[NSThread sleepForTimeInterval:1.0f];
+		}
+		
+		[t release];
+	} else if([[args stringForKey:@"s"] isEqualToString:@"DISPATCH"]) {
+		KTThreadController * t = [[KTThreadController alloc] initWithBoard:b
+														  startingLocation:startingLocation];
+		
+		FSLog2(FSLogLevelInfo, @"dispatch:");
+		
+		[[[[NSThread alloc] initWithTarget:t
+								  selector:@selector(runThreaded)
+									object:nil]
+		  autorelease]
+		 start];
+		
+		while(![t finished]) {
+			[NSThread sleepForTimeInterval:1.0f];
+		}
+		
+		[t release];
+	} else {
+		FSLog2(FSLogLevelError, @"Unrecognized solver");
+		FSLog2(FSLogLevelError, @"Please use either SERIAL, THREAD, or DISPATCH");
+		[pool drain];
+		return -1;
 	}
 	
 	[b release];
